@@ -31,7 +31,7 @@ def test_min_window(chrome):
     time.sleep(2)
 
 #Тест 03
-def test_7(chrome):
+def test_poisk_string(chrome):
     """нахождение строки поиска и ввод значения в строку поиска"""
 
     chrome.get('https://ozon.by')
@@ -42,14 +42,23 @@ def test_7(chrome):
 #Тест 04
 def test_double_window(chrome):
     """Переход в первую ссылку, после во вторую и обратно"""
+
     chrome.get('https://ozon.by')
     time.sleep(2)
     chrome.get("https://habr.com/ru/feed/")
-    time.sleep(2)
+    time.sleep(1)
     chrome.back()
 
 #Тест 05
-def test_time_out(chrome):
-    """ожидание загрузки страницы за 5 сек"""
-    chrome.set_page_load_timeout(5)
+def test_poisk_elementa(chrome):
+    """поиск элемента корзина"""
+
+    chrome.maximize_window()
     chrome.get('https://ozon.by')
+    #element_korzina = "a[href='/cart'"
+    element_korzina = chrome.find_element(By.CSS_SELECTOR, "a[href='/cart'")
+
+    if element_korzina.is_displayed():
+        print('Element naiden')
+    else:
+        print('Element ne naiden')
