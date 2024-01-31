@@ -59,7 +59,7 @@ def test_poisk_string(chrome):
     assert element.is_enabled(), 'Element ne naiden'
 
 #Тест 04
-def test_double_window(chrome):
+def test_poisk_elementa_i_perehod(chrome):
     """Найти эелемент и кликнуть"""
 
 
