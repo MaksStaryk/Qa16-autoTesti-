@@ -16,19 +16,22 @@ def chrome():
     driver.quit()
 
 #Тест 01
-def test_max_window(chrome):
-    """открытие  в  разрешении экрана width = 1920 height = 1080"""
+def test_element_currency(chrome):
+    """Находим элемент выбора валют и проверяем можно ли нажать"""
 
-    expect_width = 1920
-    expect_height = 1080
-    chrome.set_window_size(expect_width,expect_height)
 
-    window_size = chrome.get_window_size()
+    chrome.maximize_window()
     chrome.get("https://ozon.by")
-    time.sleep(2)
 
-    assert window_size['width'] == expect_width
-    assert window_size['height'] == expect_height
+    element_money = chrome.find_element(By.CSS_SELECTOR, "[class='od7 ga26-a undefined'] ")
+
+    time.sleep(3)
+
+    element_money.click()
+
+    time.sleep(4)
+
+    assert element_money.is_enabled(), 'Элемент не доступен'
 
 
 #Тест 02
@@ -40,8 +43,8 @@ def test_find_element_seller(chrome):
 
     element_seller = chrome.find_element(By.LINK_TEXT, "Стать продавцом")
     time.sleep(2)
-    chrome.execute_script("arguments[0].style.border='2px solid red'", element_seller)
-    assert element_seller.is_displayed(), 'Element ne naiden'
+
+    assert element_seller.is_displayed(), 'Элемент отсутствует'
 
 
 
@@ -52,10 +55,10 @@ def test_poisk_string(chrome):
     chrome.get('https://ozon.by')
     element = chrome.find_element(By.XPATH, '//input')
     element.click()
-    element.send_keys('elektronika')
+    element.send_keys('электроника')
     time.sleep(3)
 
-    assert element.is_enabled(), 'Element ne naiden'
+    assert element.is_enabled(), 'Элемент не доступен'
 
 #Тест 04
 def test_poisk_elementa_i_perehod(chrome):
@@ -69,7 +72,7 @@ def test_poisk_elementa_i_perehod(chrome):
 
     element_clothes_true = chrome.find_element(By.CSS_SELECTOR, "[class='de9 fd']")
 
-    assert element_clothes_true.is_displayed(), 'Element ne naiden'
+    assert element_clothes_true.is_displayed(), 'Элемент отсутствует'
 
 
 
@@ -83,5 +86,5 @@ def test_poisk_elementa(chrome):
     #element_korzina = "a[href='/cart'"
     element_korzina = chrome.find_element(By.CSS_SELECTOR, "a[href='/cart'")
 
-    assert element_korzina.is_displayed(), "Element ne naiden"
+    assert element_korzina.is_displayed(), "Элемент отсутствует"
 
