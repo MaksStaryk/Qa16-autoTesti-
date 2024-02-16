@@ -60,6 +60,7 @@ def test_contacts(chrome, our_website):
     """идем вниз в строку и находим доп.инфор. об Ozon """
 
     element_is_help = chrome.find_element(By.CSS_SELECTOR, "[class='j0a d6p h8d']")
+
     chrome.execute_script("arguments[0].scrollIntoView();", element_is_help)
     element_under_house = chrome.find_elements(By.CSS_SELECTOR, "[class='d0i'] div:nth-child(1)")
 

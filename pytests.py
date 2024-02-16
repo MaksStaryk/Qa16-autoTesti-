@@ -98,3 +98,4 @@ def test_string_search_numbers(chrome, our_website):
     search_everywhere = chrome.find_element(By.XPATH, "//*[text()='Искать везде']")
 
     assert search_everywhere.is_enabled(), "Элемент не доступен"
+
