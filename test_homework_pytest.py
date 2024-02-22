@@ -2,24 +2,25 @@ import time
 import pytest
 
 from selenium.webdriver import Keys
-from conftest import chrome
+from conftest import driver_chrome
 from selenium.webdriver.common.by import By
 from conftest import our_website
 from conftest import web_page_phone
+
 
 list_other_think = ["книга", "сковородка", "стиральная машина", "ноутбук"]
 
 
 @pytest.mark.parametrize("other_things", list_other_think)
-def test_string_search(chrome, other_things, our_website):
-    """В строке поиска вводим названия предметов из списка из списка"""
+def test_string_search(driver_chrome, other_things, our_website):
+    """В строке поиска вводим названия предметов из списка"""
 
-    element = chrome.find_element(By.XPATH, '//input')
+    element = driver_chrome.find_element(By.XPATH, '//input')
     element.click()
 
     element.send_keys(other_things, Keys.ENTER)
 
-    search_everywhere = chrome.find_element(By.XPATH, "//*[text()='Искать везде']")
+    search_everywhere = driver_chrome.find_element(By.XPATH, "//*[text()='Искать везде']")
 
     assert search_everywhere.is_enabled(), "Элемент не доступен"
 
@@ -55,14 +56,14 @@ def test_add_thing(chrome, web_page_phone):
     assert element_thing.is_displayed()
 
 
-@pytest.mark.skip
-def test_contacts(chrome, our_website):
+#@pytest.mark.skip
+def test_contacts(driver_chrome, our_website):
     """идем вниз в строку и находим доп.инфор. об Ozon """
 
-    element_is_help = chrome.find_element(By.CSS_SELECTOR, "[class='j0a d6p h8d']")
+    element_is_help = driver_chrome.find_element(By.CSS_SELECTOR, "[class='j0a d6p h8d']")
 
-    chrome.execute_script("arguments[0].scrollIntoView();", element_is_help)
-    element_under_house = chrome.find_elements(By.CSS_SELECTOR, "[class='d0i'] div:nth-child(1)")
+    driver_chrome.execute_script("arguments[0].scrollIntoView();", element_is_help)
+    element_under_house = driver_chrome.find_elements(By.CSS_SELECTOR, "[class='d0i'] div:nth-child(1)")
 
     for element in element_under_house:
         assert element.is_enabled(), "no work"
@@ -88,14 +89,16 @@ def test_location(chrome, our_website):
 
 
 @pytest.mark.xfail
-def test_string_search_numbers(chrome, our_website):
+def test_string_search_numbers(driver_chrome, our_website):
     """В строке поиска вводим числовое значение из списка"""
 
-    element = chrome.find_element(By.XPATH, '//input')
+    element = driver_chrome.find_element(By.XPATH, '//input')
     element.click()
 
     element.send_keys("45", Keys.ENTER)
 
-    search_everywhere = chrome.find_element(By.XPATH, "//*[text()='Искать везде']")
+    search_everywhere = driver_chrome.find_element(By.XPATH, "//*[text()='Искать везде']")
 
     assert search_everywhere.is_enabled(), "Элемент не доступен"
+
+

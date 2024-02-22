@@ -55,13 +55,13 @@ def test_add_thing(chrome, web_page_phone):
     assert element_thing.is_displayed()
 
 
-@pytest.mark.skip
-def test_contacts(chrome, our_website):
+#@pytest.mark.skip
+def test_contacts(driver_chrome, our_website):
     """идем вниз в строку и находим доп.инфор. об Ozon """
 
-    element_is_help = chrome.find_element(By.CSS_SELECTOR, "[class='j0a d6p h8d']")
-    chrome.execute_script("arguments[0].scrollIntoView();", element_is_help)
-    element_under_house = chrome.find_elements(By.CSS_SELECTOR, "[class='d0i'] div:nth-child(1)")
+    element_is_help = driver_chrome.find_element(By.CSS_SELECTOR, "[class='j0a d6p h8d']")
+    driver_chrome.execute_script("arguments[0].scrollIntoView();", element_is_help)
+    element_under_house = driver_chrome.find_elements(By.CSS_SELECTOR, "[class='d0i'] div:nth-child(1)")
 
     for element in element_under_house:
         assert element.is_enabled(), "no work"
