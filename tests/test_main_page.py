@@ -3,9 +3,6 @@ import time
 import pytest
 
 from random import randint
-
-from selenium.webdriver.support.wait import WebDriverWait
-
 from locators.locators_for_main_page import *
 from pages.main_page import MainPage
 from conftest import driver_chrome
@@ -93,6 +90,45 @@ def test_add_basket(driver_chrome):
     """кликаем по элементу Продукты питания """
 
     add_basket = MainPage(driver_chrome)
+    add_basket.open()
     add_basket.food()
+    time.sleep(6)
 
     assert 'Продукты питания' in add_basket.title(), "element not dispalayed"
+
+
+def test_text_catalog(driver_chrome):
+    """check text """
+
+    catalog_text = MainPage(driver_chrome)
+    if catalog_text.text(delivery_address) is not None:
+        assert "Каталог" in catalog_text.text(delivery_address)
+    else:
+        print("element doesn't find")
+
+
+def test_get_attribute(driver_chrome):
+    """element attribute corresponds to page link"""
+
+    attribute = MainPage(driver_chrome)
+    attribute.open()
+
+    assert attribute.get_attribute(xpath_seller, "href") == web_site, "href is wrong"
+
+
+def test_get_text(driver_chrome):
+    """get element text"""
+    get_text = MainPage(driver_chrome)
+    get_text.open()
+
+    assert get_text.get_text(product_food) == "Продукты питания", "text is wrong"
+
+
+def test_submit(driver_chrome):
+    submit = MainPage(driver_chrome)
+    submit.open()
+    submit.find_element(search_string)
+    submit.search_field("Nokia 3310")
+    submit.submit(search_button)
+
+    assert submit.find_element(copy_search_every), "submit doesnt work"

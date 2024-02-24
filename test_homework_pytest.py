@@ -1,7 +1,11 @@
 import time
+from telnetlib import EC
+
 import pytest
 
 from selenium.webdriver import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+
 from conftest import driver_chrome
 from selenium.webdriver.common.by import By
 from conftest import our_website
@@ -69,6 +73,16 @@ def test_contacts(driver_chrome, our_website):
         assert element.is_enabled(), "no work"
         print(element.text)
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+def test_attribute(driver_chrome):
+    driver_chrome.get("https://ozon.by/category/smartfony-15502/")
+
+    elements = driver_chrome.find_element(By.XPATH, "(//div[@class='b237-a1']/following-sibling::div)[3]")
+    elements.click()
+    time.sleep(3)
 
 @pytest.mark.regression
 def test_location(chrome, our_website):
