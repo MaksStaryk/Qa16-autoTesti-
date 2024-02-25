@@ -47,9 +47,7 @@ def our_website(driver_chrome):
     driver_chrome.get("https://ozon.by")
 
 
-@pytest.fixture
-def web_page_phone(driver_chrome):
-    driver_chrome.get("https://ozon.by/category/smartfony-15502/")
+
 
 
 

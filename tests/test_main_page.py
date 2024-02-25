@@ -132,3 +132,4 @@ def test_submit(driver_chrome):
     submit.submit(search_button)
 
     assert submit.find_element(copy_search_every), "submit doesnt work"
+

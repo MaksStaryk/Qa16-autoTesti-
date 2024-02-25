@@ -55,3 +55,4 @@ class BasePage:
 
     def switch_site(self,):
         """perehodim na druguju vkrladku"""
+
