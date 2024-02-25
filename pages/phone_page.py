@@ -13,12 +13,15 @@ class PhonePage(BasePage):
     def click_three_days(self):
         """Кликаем по элементу"""
 
-        self.find_element(three_days).click()
+        self.find_element(three_days_button).click()
 
-    def click_add_basket(self):
+    def click_test(self, locator):
+        self.driver_chrome.execute_script("arguments[0].click();", self.find_element(locator))
+
+    def click_add_basket(self, locator):
         """Кликаем по элементу"""
 
-        self.find_element(add_basket_fir_element).click()
+        self.find_element(locator).click()
 
     def click_clear_basket(self):
         """Кликаем по элементу"""
