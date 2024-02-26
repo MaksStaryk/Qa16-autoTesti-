@@ -1,6 +1,6 @@
 import time
+
 from selenium.webdriver.support.ui import Select
-from locators.locators_for_main_page import search_string
 
 
 class BasePage:
@@ -39,20 +39,15 @@ class BasePage:
         time.sleep(2)
         some_string.clear()
 
-    def select_some(self , locator, text: str):
+    def select_some(self, locator, text: str):
         select_element = Select(self.find_element(locator))
         select_element.select_by_visible_text(text)
 
-    def current_window(self):
-        return self.driver_chrome.current_window_handle
+    def switch_to_page(self, locator_1):
+        self.driver_chrome.current_window_handle
+        self.scroll_to_basement(locator_1)
+        self.find_element(locator_1).click()
+        tabs = self.driver_chrome.window_handles
+        self.driver_chrome.switch_to.window(tabs[1])
 
-    def all_windows(self):
-        return self.driver_chrome.window_handles
-
-    def switch_windows(self, windows, num: int):
-        return self.driver_chrome.switch_to.window(windows[num])
-
-
-    def switch_site(self,):
-        """perehodim na druguju vkrladku"""
-
+        return self.driver_chrome.current_url

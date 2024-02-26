@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
-# (By.XPATH, "")
+# (By.XPATH, "") помощник для xpath
+# (By.CSS_SELECTOR, ") помощник для css
 
 button_doesnt_matter = (By.XPATH, "(//input[@class='e136-a0'])[1]")
 checkbox = (By.XPATH, "(//div[@class='y9d'])[1]")
@@ -21,3 +22,5 @@ search_string = (By.XPATH, "//input[@class='z3v tsBody500Medium']")
 clear_search_string = (By.XPATH, "//div[@class='vz4']")
 help_search = (By.CSS_SELECTOR, "[class='f153-a f153-a5 f153-b7']")
 switch_to_phone = (By.XPATH, "//*[@class='r8i ir9'][1]")
+buy_on_click = (By.CSS_SELECTOR, "[class='k3q kq7']")
+vk_element = (By.XPATH, "//a[@title='VK']")

@@ -1,12 +1,8 @@
 import time
 import pytest
 
-from random import randint
-
 from locators.locators_for_phone_page import *
-
 from conftest import driver_chrome
-
 from pages.phone_page import PhonePage
 
 
@@ -87,13 +83,14 @@ def test_selected_phone(driver_chrome):
 
 
 def test_clear_string(driver_chrome):
-    """Заполняем поле и удуляем содержимое"""
+    """Заполняем поле и удaляем содержимое"""
 
     clear_string = PhonePage(driver_chrome)
     clear_string.open_phone_page()
     clear_string.clear_text('Dell', search_string)
 
     assert not clear_string.find_element(clear_search_string).is_displayed, "we see text"
+
 
 @pytest.mark.xfail
 def test_select(driver_chrome):
@@ -103,20 +100,11 @@ def test_select(driver_chrome):
     some_select.open_phone_page()
     some_select.select_some(help_search, "Высокий рейтинг")
 
+
 def test_switch_to(driver_chrome):
-    """"перенести в класс"""
+    """"переходим по ссылке во вторую вкладку"""
     switch_to = PhonePage(driver_chrome)
     switch_to.open_phone_page()
-    switch_to.current_window()
-    time.sleep(2)
-    window_1 = switch_to.current_window()
-    time.sleep(2)
-    switch_to.click_test(switch_to_phone)
-    time.sleep(2)
-    window_2 = switch_to.current_window()
-    windows = switch_to.all_windows()
-    print(windows)
 
-
-
-
+    assert switch_to.switch_to_page(vk_element) == "https://vk.com/ozon?perehod=footer", (
+        "the transition was not completed")
