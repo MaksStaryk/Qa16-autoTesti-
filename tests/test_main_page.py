@@ -101,8 +101,8 @@ def test_text_catalog(driver_chrome):
     """check text """
 
     catalog_text = MainPage(driver_chrome)
-    if catalog_text.text(delivery_address) is not None:
-        assert "Каталог" in catalog_text.text(delivery_address)
+    if catalog_text.get_text(delivery_address) is not None:
+        assert "Каталог" in catalog_text.get_text(delivery_address)
     else:
         print("element doesn't find")
 
