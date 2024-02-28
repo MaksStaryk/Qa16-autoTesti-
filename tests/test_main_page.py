@@ -3,7 +3,7 @@ import time
 import pytest
 
 from random import randint
-from locators.locators_for_main_page import *
+from locators.locators_for_main_page import LocatorsMain
 from pages.main_page import MainPage
 from conftest import driver_chrome
 from list_words_and_number.words_and_number_list import list_other_think
@@ -26,7 +26,7 @@ def test_find_element_seller(driver_chrome):
     seller = MainPage(driver_chrome)
     seller.open()
 
-    assert seller.find_element(xpath_seller).is_enabled(), 'Элемент отсутствует'
+    assert seller.find_element(LocatorsMain.XPATH_SELLER).is_enabled(), 'Элемент отсутствует'
 
 
 # pytest.mark.skip
@@ -35,10 +35,10 @@ def test_qr(driver_chrome):
 
     element_qr = MainPage(driver_chrome)
     element_qr.open()
-    element_qr.scroll_to_basement(basement_qrcode)
+    element_qr.scroll_to_basement(LocatorsMain.BASEMENT_QRCODE)
     time.sleep(3)
 
-    assert element_qr.find_element(basement_qrcode).is_displayed(), "Элемент отсутствует"
+    assert element_qr.find_element(LocatorsMain.BASEMENT_QRCODE).is_displayed(), "Элемент отсутствует"
 
 
 @pytest.mark.important
@@ -49,7 +49,7 @@ def test_search_string(driver_chrome, other_things):
     search_str = MainPage(driver_chrome)
     search_str.enter_world(other_things)
 
-    assert search_str.find_element(element_search_every_where), "Element doesn't dispayed"
+    assert search_str.find_element(LocatorsMain.ELEMENT_SEARCH_EVERY_WHERE), "Element doesn't dispayed"
 
 
 @pytest.mark.xfail
@@ -60,7 +60,7 @@ def test_test_string_search_numbers(driver_chrome):
     search.open()
     search.enter_number(randint(1, 198))
 
-    assert search.find_element(element_search_every_where), "Element doesn't dispayed"
+    assert search.find_element(LocatorsMain.ELEMENT_SEARCH_EVERY_WHERE), "Element doesn't dispayed"
 
 
 @pytest.mark.map
@@ -71,10 +71,10 @@ def test_location(driver_chrome):
     street_element.open()
     street_element.location()
 
-    assert street_element.find_element(delivery_address).is_displayed, "element not dispalayed"
-    assert street_element.find_element(element_pickup).is_enabled(), "element not available"
-    assert street_element.find_element(element_courier).is_enabled(), "element not available"
-    assert street_element.find_element(element_locate).is_enabled(), "element not available"
+    assert street_element.find_element(LocatorsMain.DELIVERY_ADDRESS).is_displayed, "element not dispalayed"
+    assert street_element.find_element(LocatorsMain.ELEMENT_PICKUP).is_enabled(), "element not available"
+    assert street_element.find_element(LocatorsMain.ELEMENT_COURIER).is_enabled(), "element not available"
+    assert street_element.find_element(LocatorsMain.ELEMENT_LOCATE).is_enabled(), "element not available"
 
 
 def test_check_search_string(driver_chrome):
@@ -101,8 +101,8 @@ def test_text_catalog(driver_chrome):
     """check text """
 
     catalog_text = MainPage(driver_chrome)
-    if catalog_text.get_text(delivery_address) is not None:
-        assert "Каталог" in catalog_text.get_text(delivery_address)
+    if catalog_text.get_text(LocatorsMain.DELIVERY_ADDRESS) is not None:
+        assert "Каталог" in catalog_text.get_text(LocatorsMain.DELIVERY_ADDRESS)
     else:
         print("element doesn't find")
 
@@ -113,7 +113,7 @@ def test_get_attribute(driver_chrome):
     attribute = MainPage(driver_chrome)
     attribute.open()
 
-    assert attribute.get_attribute(xpath_seller, "href") == web_site, "href is wrong"
+    assert attribute.get_attribute(LocatorsMain.XPATH_SELLER, "href") == LocatorsMain.WEB_SITE, "href is wrong"
 
 
 def test_get_text(driver_chrome):
@@ -121,15 +121,32 @@ def test_get_text(driver_chrome):
     get_text = MainPage(driver_chrome)
     get_text.open()
 
-    assert get_text.get_text(product_food) == "Продукты питания", "text is wrong"
+    assert get_text.get_text(LocatorsMain.PRODUCT_FOOD) == "Продукты питания", "text is wrong"
 
 
 def test_submit(driver_chrome):
     submit = MainPage(driver_chrome)
     submit.open()
-    submit.find_element(search_string)
+    submit.find_element(LocatorsMain.SEARCH_STRING)
     submit.search_field("Nokia 3310")
-    submit.submit(search_button)
+    submit.submit(LocatorsMain.SEARCH_BUTTON)
 
-    assert submit.find_element(copy_search_every), "submit doesnt work"
+    assert submit.find_element(LocatorsMain.COPY_SEARCH_EVERY), "submit doesnt work"
 
+
+def test_send(driver_chrome):
+    """"""
+    send = MainPage(driver_chrome)
+    send.open()
+    send.enter_text(MainPage.SEARCH_STRING, "iphone")
+    time.sleep(1)
+    send.enter_keyboard(MainPage.SEARCH_STRING)
+
+    assert send.find_element(LocatorsMain.ELEMENT_SEARCH_EVERY_WHERE).is_displayed, "element everywhere not displayed"
+
+
+def test_move(driver_chrome):
+    move = MainPage(driver_chrome)
+    move.open()
+    move.mouse_move(LocatorsMain.DELIVERY_ADDRESS)
+    time.sleep(5)

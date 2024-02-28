@@ -1,8 +1,7 @@
 import time
 
+from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.support.ui import Select
-
-from locators.locators_for_phone_page import *
 
 
 class BasePage:
@@ -57,19 +56,55 @@ class BasePage:
     def click_test(self, locator):
         self.driver_chrome.execute_script("arguments[0].click();", self.find_element(locator))
 
-    def click_three_days(self):
-        """Кликаем по элементу"""
+    def iframe(self, locator):
+        return self.driver_chrome.iframe(self.find_element(locator))
 
-        self.find_element(three_days_button).click()
+    def close_iframe(self):
+        return self.driver_chrome.switch_to.default_content()
 
-    def click_add_basket(self, locator):
-        """Кликаем по элементу"""
+    def download(self, locator, path: str):
+        element = self.find_element(locator)
+        file = path
+        element.send_keys(file)
 
+    def enter_text(self, locator, text: str):
+        element = self.find_element(locator)
+        element.click()
+        element.send_keys(text)
+
+    def enter_keyboard(self, locator):
+        return self.find_element(locator).send_keys(Keys.ENTER)
+
+    def click_double(self, locator):
+        action = ActionChains(self.driver_chrome)
+        double = self.find_element(locator)
+        action.double_click(double).perform()
+
+    def right_click(self, locator):
+        right_click = self.driver_chrome(locator)
+        action = ActionChains(self.driver_chrome)
+        action.context_click(right_click).click()
+
+    def mouse_move(self, locator):
+        element = self.find_element(locator)
+        action = ActionChains(self.driver_chrome)
+        action.move_to_element(element).click().perform()
+
+    def clear(self, locator):
+        return self.find_element(locator).clear()
+
+    def close_alert(self, locator):
         self.find_element(locator).click()
+        alert = self.driver_chrome.switch_to.alert
+        alert.accept()
 
-    def click_clear_basket(self):
-        """Кликаем по элементу"""
-        self.find_element(clear_basket)
+    def accept_alert(self, locator):
+        self.find_element(locator).click()
+        alert = self.driver_chrome.switch_to.alert
+        alert.dismiss()
 
-    def click_original_phone(self):
-        self.find_element(button_original_phone).click()
+    def prompt_alert(self, locator, text):
+        self.find_element(locator).click()
+        alert = self.driver_chrome.switch_to.alert
+        alert.send_keys(text)
+        alert.accept()
