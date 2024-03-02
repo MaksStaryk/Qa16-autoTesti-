@@ -3,7 +3,9 @@ import pytest
 
 from conftest import driver_chrome
 from pages.phone_page import PhonePage
-from locators.locators_for_phone_page import LocatorPhonePage
+from locators.phonelocators import LocatorPhonePage
+
+
 @pytest.mark.title
 def test_title(driver_chrome):
     title = PhonePage(driver_chrome)
@@ -106,4 +108,3 @@ def test_switch_to(driver_chrome):
 
     assert switch_to.switch_to_page(LocatorPhonePage.VK_ELEMENT) == "https://vk.com/ozon?perehod=footer", (
         "the transition was not completed")
-

@@ -1,6 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from pages.base_page import BasePage
-from locators.locators_for_phone_page import LocatorPhonePage
+from locators.phonelocators import LocatorPhonePage
 
 
 class PhonePage(BasePage, LocatorPhonePage):

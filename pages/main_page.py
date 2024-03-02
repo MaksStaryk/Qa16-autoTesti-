@@ -1,7 +1,7 @@
 
 from selenium.webdriver.common.keys import Keys
 from pages.base_page import BasePage
-from locators.locators_for_main_page import *
+from locators.mainlocators import LocatorsMain
 
 
 class MainPage(BasePage, LocatorsMain):
@@ -32,28 +32,10 @@ class MainPage(BasePage, LocatorsMain):
         street_element = self.find_element(self.DELIVERY_ADDRESS).click()
         on_map = self.find_element(self.SELECT_ON_THE_MAP).click()
 
-
-    def access(self):
-        access_element = self.find_element(self.ACESS).click()
-
     def food(self):
-
         self.find_element(self.THINGS).click()
 
     def search_field(self, some_text):
         analog_google = self.find_element(self.SEARCH_STRING)
         analog_google.click()
         analog_google.send_keys(some_text)
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -3,7 +3,7 @@ import time
 import pytest
 
 from random import randint
-from locators.locators_for_main_page import LocatorsMain
+from locators.mainlocators import LocatorsMain
 from pages.main_page import MainPage
 from conftest import driver_chrome
 from list_words_and_number.words_and_number_list import list_other_think
