@@ -1,5 +1,3 @@
-import time
-
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -12,7 +10,6 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 @pytest.fixture(autouse=False)
 def driver_chrome():
     print('Start driver GoogleChrome\n')
-
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.maximize_window()
     driver.implicitly_wait(5)
@@ -45,9 +42,3 @@ def driver_firefox():
 @pytest.fixture(autouse=False)
 def our_website(driver_chrome):
     driver_chrome.get("https://ozon.by")
-
-
-
-
-
-

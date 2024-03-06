@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class LocatorPhonePage:
+class PhonePageLocator:
     BUTTON_DOESNT_MATTER = (By.XPATH, "(//input[@class='e136-a0'])[1]")
     CHECKBOX = (By.XPATH, "(//div[@class='y9d'])[1]")
     BRAND = (By.XPATH, "(//div[@class='ie7']//span)[2]")

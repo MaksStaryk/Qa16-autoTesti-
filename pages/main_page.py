@@ -1,7 +1,7 @@
 
 from selenium.webdriver.common.keys import Keys
 from pages.base_page import BasePage
-from locators.mainlocators import LocatorsMain
+from locators.main_locators import LocatorsMain
 
 
 class MainPage(BasePage, LocatorsMain):

@@ -1,9 +1,9 @@
 from selenium.webdriver.common.keys import Keys
 from pages.base_page import BasePage
-from locators.phonelocators import LocatorPhonePage
+from locators.phone_locators import PhonePageLocator
 
 
-class PhonePage(BasePage, LocatorPhonePage):
+class PhonePage(BasePage, PhonePageLocator):
 
     def open_phone_page(self):
         """Open Phone page"""

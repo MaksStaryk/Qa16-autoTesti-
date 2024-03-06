@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class LocatorsMain:
+class MainLocators:
     XPATH_SELLER = (By.XPATH, "//a[@class='aj7 s5d ds6']")
     XPATH_SELLER1 = (By.PARTIAL_LINK_TEXT, "Стать продавцом")
     SEARCH_STRING = (By.XPATH, "//input")

@@ -57,7 +57,7 @@ class BasePage:
         self.driver_chrome.execute_script("arguments[0].click();", self.find_element(locator))
 
     def iframe(self, locator):
-        return self.driver_chrome.iframe(self.find_element(locator))
+        return self.driver_chrome.switch_to.iframe(self.find_element(locator))
 
     def close_iframe(self):
         return self.driver_chrome.switch_to.default_content()
