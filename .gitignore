@@ -1,0 +1,6 @@
+.idea/
+.pytest_cache/
+__pycache__/
+.venv/
+testi_ochno.html
+test_some_thing.py
