@@ -1,3 +1,4 @@
+import allure
 from services.user.create_user import CreateUser
 from services.other_dict_for_tests.user_dict import *
 from services.user.delete_user import DeleteUser
@@ -6,12 +7,14 @@ from services.user.login_into_system import Login
 from services.user.update_inf import UpdateUser
 
 
+@allure.feature('create user')
 def test_create_user():
     create_user = CreateUser()
     create_user.create_user(user_01)
     create_user.check_cod_200()
 
 
+@allure.feature('get information')
 def test_get_inf_user():
     inf_user = GetUser()
     inf_user.get_inf('Maxim')
