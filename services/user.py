@@ -60,9 +60,32 @@ class UserService1(BaseService):
         except requests.exceptions.RequestException as e:
             self.logger.info("information update failed", str(e), exc_info=True)
 
-    def check_login_into(self):
-        assert 'logged in user1 session' in self.response['message'], 'we dont received message'
+    def enter_system(self, username: str, some_password):
+        try:
+            self.logger.info(f"user login for name {username}")
+            self.response = self.get(
+            f'https://petstore.swagger.io/v2/user/login?username={username}&password={some_password}')
+            self.logger.info(f"{username} is logged in")
 
+        except requests.exceptions.RequestException as e:
+            self.logger.error(f'{username} is not logged in', str(e), exc_info=True)
+
+    def check_login_into(self):
+        try:
+            self.logger.info('check that the user is logged in system')
+            assert 'logged in user session' in self.response['message'], 'we dont received message'
+            self.logger.info('check passed')
+
+        except AssertionError as e:
+            self.logger.error("assert verification failed", e, exc_info=True)
+
+    def login_out(self, some_name: str):
+        try:
+            self.logger.info(f"log out user {some_name}")
+            self.response = requests.get('https://petstore.swagger.io/v2/user/logout')
+
+        except requests.exceptions.RequestException as e:
+            self.logger.error(f"User {some_name} in system", e, exc_info=True)
     def assert_email(self, email):
         try:
             assert self.response['email'] == email
