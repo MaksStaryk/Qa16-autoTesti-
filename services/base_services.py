@@ -15,7 +15,7 @@ class BaseService:
         self.logger.setLevel(logging.DEBUG)
         handler = StreamHandler(stream=sys.stdout)
         handler.setFormatter(Formatter(fmt='%(asctime)s %(levelname)s %(message)s'))
-        file_handler = FileHandler(r'C:\Users\Admin\PycharmProjects\Qa16-autoTesti-\services\store1\store1.log')
+        file_handler = FileHandler(r'C:\Users\Admin\PycharmProjects\Qa16-autoTesti-\services\logs\logs.log')
         file_handler.setFormatter(Formatter(fmt='%(asctime)s %(levelname)s %(message)s'))
         self.logger.addHandler(handler)
         self.logger.addHandler(file_handler)
@@ -55,10 +55,3 @@ class BaseService:
         else:
             self.logger.info("Fail cod 200 for put request")
             assert False
-
-    def check_id(self, obj_id: int):
-        try:
-            self.logger.info("Try received id")
-            assert self.response_json['id'] == obj_id, "we have got other id"
-        except AssertionError as e:
-            self.logger.error(f"Check for id: {obj_id} failed", str(e), exc_info=True)
